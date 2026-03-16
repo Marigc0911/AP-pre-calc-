@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Precalculus Study Tracker – Road to May 12</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --surface: #ffffff;
+    --surface2: #faf8f5;
+    --border: #e8e2d9;
+    --text: #1a1612;
+    --text-muted: #7a7168;
+    --accent: #c8553d;
+    --accent-soft: #f7e8e5;
+    --green: #3a7d44;
+    --green-soft: #e5f2e7;
+    --blue: #2d5fa6;
+    --blue-soft: #e5edf8;
+    --gold: #c49a2e;
+    --gold-soft: #faf3e0;
+    --purple: #6b4fa0;
+    --purple-soft: #f0ecf8;
+    --teal: #2a7a74;
+    --teal-soft: #e5f3f2;
+    --radius: 16px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a1612 0%, #2d1f0e 50%, #1a2a1a 100%);
+    color: #fff;
+    padding: 52px 24px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(200,85,61,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 30%, rgba(58,125,68,0.15) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: #f4a58a; }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 32px;
+  }
+
+  /* COUNTDOWN */
+  .countdown-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .countdown-chip {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 10px 20px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+  }
+  .countdown-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f4a58a;
+    display: block;
+    line-height: 1;
+  }
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* GLOBAL PROGRESS */
+  .global-progress-wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .progress-pct {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .progress-track {
+    background: rgba(255,255,255,0.12);
+    border-radius: 100px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, #f4a58a, #c8553d);
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    min-width: 0;
+  }
+
+  /* MAIN CONTAINER */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 16px 0;
+  }
+
+  /* TOOLBAR */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .toolbar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 9px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-danger {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .btn-danger:hover { background: #f0d0cb; }
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg); }
+  .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* UNIT LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* WEEK CARD */
+  .week-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .week-card:hover { box-shadow: var(--shadow-md); }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    padding: 18px 22px;
+    cursor: pointer;
+    user-select: none;
+    gap: 14px;
+    transition: background 0.15s;
+  }
+  .week-header:hover { background: var(--surface2); }
+
+  .week-num-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--text);
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+  }
+  .week-num-badge.review-badge {
+    background: linear-gradient(135deg, var(--accent), #a03a26);
+  }
+
+  .week-info { flex: 1; min-width: 0; }
+  .week-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .week-dates {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* WEEK PROGRESS MINI */
+  .week-progress-mini {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .week-progress-track {
+    width: 80px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .week-progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: var(--green);
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .week-pct-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 32px;
+    text-align: right;
+  }
+  .week-check-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .chevron {
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .week-card.open .chevron { transform: rotate(180deg); }
+
+  /* WEEK BODY */
+  .week-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+  .week-card.open .week-body { display: block; }
+
+  /* DAY ROW */
+  .day-row {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .day-row:last-child { border-bottom: none; }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .day-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .day-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .day-topic-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2px 9px;
+    margin-left: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+
+  /* TASKS */
+  .task-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .task-item:hover { border-color: #ccc; background: #fdfcfb; }
+  .task-item.done {
+    background: var(--green-soft);
+    border-color: #b8dfc0;
+  }
+
+  .task-cb {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+    background: #fff;
+  }
+  .task-item.done .task-cb {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+  .task-cb::after { content: ''; }
+  .task-item.done .task-cb::after { content: '✓'; font-size: 11px; font-weight: 700; color: #fff; }
+
+  .task-text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    transition: color 0.18s;
+  }
+  .task-item.done .task-text {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    text-decoration-color: #a8c9af;
+  }
+  .task-type-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Unit color stripes */
+  .unit-1a .day-badge { background: var(--blue-soft); color: var(--blue); }
+  .unit-1b .day-badge { background: var(--purple-soft); color: var(--purple); }
+  .unit-2a .day-badge { background: var(--gold-soft); color: var(--gold); }
+  .unit-2b .day-badge { background: #fff0e5; color: #c46520; }
+  .unit-3a .day-badge { background: var(--teal-soft); color: var(--teal); }
+  .unit-3b .day-badge { background: #fce8f0; color: #b03060; }
+  .review .day-badge { background: var(--accent-soft); color: var(--accent); }
+  .final-review .day-badge { background: #1a1612; color: #fff; }
+
+  /* Unit week stripes */
+  .week-card.unit-1a .week-num-badge { background: var(--blue); }
+  .week-card.unit-1b .week-num-badge { background: var(--purple); }
+  .week-card.unit-2a .week-num-badge { background: var(--gold); }
+  .week-card.unit-2b .week-num-badge { background: #c46520; }
+  .week-card.unit-3a .week-num-badge { background: var(--teal); }
+  .week-card.unit-3b .week-num-badge { background: #b03060; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,22,18,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 32px;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: var(--shadow-md);
+    transform: translateY(16px);
+    transition: transform 0.25s;
+  }
+  .modal-overlay.show .modal { transform: translateY(0); }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .modal p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+  /* MOTIVATIONAL FOOTER */
+  .motivational {
+    max-width: 860px;
+    margin: 32px auto 0;
+    padding: 0 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* SCROLL TO TOP */
+  .fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 100;
+  }
+  .fab:hover { background: var(--accent); transform: translateY(-2px); }
+
+  @media (max-width: 600px) {
+    .week-progress-track { width: 60px; }
+    .day-topic-tag { display: none; }
+    .hero { padding: 36px 16px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">📐 Your Personalized Study System</div>
+  <h1>AP Precalculus Study Tracker<br><span>Road to May 12</span></h1>
+  <p class="hero-sub">From today to exam day — one checkbox at a time.</p>
+
+  <div class="countdown-row" id="countdownRow"></div>
+
+  <div class="global-progress-wrap">
+    <div class="progress-meta">
+      <span class="progress-label">Overall Progress</span>
+      <span class="progress-pct" id="globalPct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="globalFill" style="width:0%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="toolbar">
+    <div class="toolbar-title">Study Schedule</div>
+    <div class="toolbar-actions">
+      <button class="btn btn-ghost" onclick="expandAll()">↕ Expand All</button>
+      <button class="btn btn-ghost" onclick="collapseAll()">↕ Collapse All</button>
+      <button class="btn btn-danger" onclick="showResetModal()">↺ Reset Progress</button>
+    </div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+  <div id="planner"></div>
+</div>
+
+<p class="motivational">"Mathematics is not about numbers, equations, computations, or algorithms — it is about understanding." Keep going. You've got this. 🎓</p>
+
+<button class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal">
+    <h3>Reset All Progress?</h3>
+    <p>This will uncheck every task and clear all saved data. This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="hideResetModal()">Cancel</button>
+      <button class="btn btn-danger" onclick="resetAll()">Yes, Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+// Start: March 17, 2026 (Monday), Exam: May 12, 2026
+const START = new Date(2026, 2, 17); // March 17
+const EXAM  = new Date(2026, 4, 12); // May 12
+
+const UNITS = {
+  'unit-1a': { label: 'Unit 1A – Poly & Rational', color: '#2d5fa6' },
+  'unit-1b': { label: 'Unit 1B – Poly & Rational', color: '#6b4fa0' },
+  'unit-2a': { label: 'Unit 2A – Exp & Log',       color: '#c49a2e' },
+  'unit-2b': { label: 'Unit 2B – Exp & Log',       color: '#c46520' },
+  'unit-3a': { label: 'Unit 3A – Trig & Polar',    color: '#2a7a74' },
+  'unit-3b': { label: 'Unit 3B – Trig & Polar',    color: '#b03060' },
+  'review':  { label: 'Review Weeks',              color: '#c8553d' },
+};
+
+// Build day schedule: each entry = { date, unit, topic, tasks[] }
+function addDays(base, n) {
+  const d = new Date(base);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+function fmtDate(d) {
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', weekday: 'short' });
+}
+
+function taskStudy(topic) { return { type: 'study', text: `📖 Study: ${topic}` }; }
+function taskMCQ(topic)   { return { type: 'mcq',   text: `✏️ MCQ Practice: ${topic} (10–15 questions)` }; }
+function taskFRQ(topic)   { return { type: 'frq',   text: `📝 FRQ Practice: ${topic} (write full solutions)` }; }
+function taskReview(label){ return { type: 'review',text: `🔄 Review: ${label}` }; }
+function taskMixed(label) { return { type: 'mixed', text: `🎯 Mixed MCQ Practice: ${label}` }; }
+function taskFull()       { return { type: 'full',  text: `📋 Full Practice Section: Mixed MCQ + FRQ (timed)` }; }
+function taskFlash(topic) { return { type: 'flash', text: `🃏 Flashcards / Notes: Key formulas for ${topic}` }; }
+function taskCumul(label) { return { type: 'cumul', text: `🌐 Cumulative Review: ${label}` }; }
+function taskWrap()       { return { type: 'wrap',  text: `✅ Wrap-up: Organize notes & flag weak spots` }; }
+
+// ─── SCHEDULE DEFINITION ────────────────────────────────────────────────────
+// We have ~8 weeks (March 17 – May 11) = 56 days total.
+// Weekdays only for study days (Mon–Fri), Sat = review/catch-up, Sun = rest (skip or light).
+// We'll define all 56 calendar days and assign tasks.
+
+// ─── SCHEDULE ─────────────────────────────────────────────────────────────────
+// March 17 (Mon) → May 11 (Sun) = exactly 8 weeks.
+// Mon–Sat = 6 study days/week × 8 weeks = 48 study slots.
+// Sunday is always a rest day (no tasks assigned).
+// The exam is May 12 (Monday) — last study day is May 11 (Sunday, rest) → May 10 (Sat).
+// We keep 48 entries to fill Mon Mar 17 → Sat May 10, then May 11 = rest/exam eve.
+
+const rawSchedule = [
+  // ── WEEK 1 (Mar 17 Mon – Mar 22 Sat): Unit 1A ─────────────────
+  /* Mon Mar 17 */ { unit:'unit-1a', topic:'1.1 Change in Tandem',    tasks:[taskStudy('1.1 Change in Tandem'), taskMCQ('Change in Tandem'), taskFlash('1.1 key ideas')] },
+  /* Tue Mar 18 */ { unit:'unit-1a', topic:'1.2 Rates of Change',     tasks:[taskStudy('1.2 Rates of Change'), taskMCQ('Rates of Change'), taskFlash('Average vs instantaneous rate')] },
+  /* Wed Mar 19 */ { unit:'unit-1a', topic:'1.3 Rates of Change in Linear & Quadratic Functions', tasks:[taskStudy('1.3 Linear & Quadratic Rates'), taskMCQ('1.3 MCQ'), taskFRQ('1.3 FRQ-style problems')] },
+  /* Thu Mar 20 */ { unit:'unit-1a', topic:'1.4 Polynomial Functions and Rates of Change', tasks:[taskStudy('1.4 Polynomial Rates of Change'), taskMCQ('1.4 MCQ'), taskFRQ('1.4 FRQ-style questions')] },
+  /* Fri Mar 21 */ { unit:'unit-1a', topic:'1.5A & 1.5B Polynomial Complex Zeros + Even/Odd', tasks:[taskStudy('1.5A Complex Zeros'), taskStudy('1.5B Even & Odd Polynomials'), taskMCQ('1.5 MCQ'), taskFlash('Complex zero rules')] },
+  /* Sat Mar 22 */ { unit:'unit-1a', topic:'1.6 Polynomial End Behavior + Unit 1A REVIEW', tasks:[taskStudy('1.6 Polynomial End Behavior'), taskReview('Unit 1A: 1.1–1.6'), taskMixed('Unit 1A mixed MCQ (15 questions)'), taskFRQ('Unit 1A FRQ practice'), taskWrap()] },
+
+  // ── WEEK 2 (Mar 24 Tue – Mar 29 Sat): Unit 1B ─────────────────
+  /* Tue Mar 24 */ { unit:'unit-1b', topic:'1.7A & 1.7B Rational Functions & End Behavior', tasks:[taskStudy('1.7A Rational End Behavior'), taskStudy('1.7B Rational End Behavior cont.'), taskMCQ('1.7 MCQ'), taskFlash('Horizontal asymptote rules')] },
+  /* Wed Mar 25 */ { unit:'unit-1b', topic:'1.8 Rational Functions & Zeros',    tasks:[taskStudy('1.8 Rational Zeros'), taskMCQ('1.8 MCQ'), taskFlash('Zero/factor theorem notes')] },
+  /* Thu Mar 26 */ { unit:'unit-1b', topic:'1.9 Rational Functions & Vertical Asymptotes', tasks:[taskStudy('1.9 Vertical Asymptotes'), taskMCQ('1.9 MCQ'), taskFRQ('1.9 vertical asymptote FRQ')] },
+  /* Fri Mar 27 */ { unit:'unit-1b', topic:'1.10 Rational Functions & Holes',   tasks:[taskStudy('1.10 Holes in Rational Functions'), taskMCQ('1.10 MCQ'), taskFRQ('Identify & explain holes')] },
+  /* Sat Mar 28 */ { unit:'unit-1b', topic:'1.11A & 1.11B Binomial Theorem + Polynomial Long Division', tasks:[taskStudy('1.11A Binomial Theorem'), taskStudy('1.11B Long Division & Slant Asymptotes'), taskMCQ('1.11 MCQ'), taskFRQ('Long division & slant asymptote practice')] },
+  // (Sun Mar 29 = rest)
+  /* Mon Mar 30 is week 3 start — week 2 only has 5 study days since it starts Tue */
+
+  // ── WEEK 3 (Mar 30 Mon – Apr 4 Sat): Unit 1B cont. ────────────
+  /* Mon Mar 30 */ { unit:'unit-1b', topic:'1.12A & 1.12B Translations & Dilations of Functions', tasks:[taskStudy('1.12A Translations'), taskStudy('1.12B Dilations'), taskMCQ('1.12 MCQ'), taskFlash('Transformation rules summary')] },
+  /* Tue Mar 31 */ { unit:'unit-1b', topic:'1.13 Function Model Selection & Assumption Articulation', tasks:[taskStudy('1.13 Model Selection'), taskMCQ('1.13 MCQ'), taskFRQ('Articulate model assumptions FRQ')] },
+  /* Wed Apr  1 */ { unit:'unit-1b', topic:'1.14 Function Model Construction & Application', tasks:[taskStudy('1.14 Model Construction & Application'), taskMCQ('1.14 MCQ'), taskFRQ('Build & apply a function model')] },
+  /* Thu Apr  2 */ { unit:'unit-1b', topic:'Unit 1B REVIEW',          tasks:[taskReview('All of Unit 1B (1.7–1.14)'), taskMixed('Unit 1B mixed MCQ (20 questions)'), taskFRQ('Unit 1B FRQ full practice'), taskCumul('Unit 1A + 1B combined review'), taskWrap()] },
+  /* Fri Apr  3 */ { unit:'unit-2a', topic:'2.1 Change in Arithmetic & Geometric Sequences', tasks:[taskStudy('2.1 Arithmetic & Geometric Sequences'), taskMCQ('2.1 MCQ'), taskFlash('Sequence formulas')] },
+  /* Sat Apr  4 */ { unit:'unit-2a', topic:'2.2 & 2.3 Linear vs Exponential Change + Exponential Functions', tasks:[taskStudy('2.2 Linear & Exponential Change'), taskStudy('2.3 Exponential Functions'), taskMCQ('2.2–2.3 MCQ'), taskFlash('Exponential function properties')] },
+
+  // ── WEEK 4 (Apr 6 Mon – Apr 11 Sat): Unit 2A ──────────────────
+  /* Mon Apr  6 */ { unit:'unit-2a', topic:'2.4 Exponential Function Manipulation', tasks:[taskStudy('2.4 Manipulating Exponentials'), taskMCQ('2.4 MCQ'), taskFRQ('Algebra manipulation problems')] },
+  /* Tue Apr  7 */ { unit:'unit-2a', topic:'2.5A & 2.5B Exponential Context & Data Modeling', tasks:[taskStudy('2.5A & 2.5B Exponential Context & Data Modeling'), taskMCQ('2.5 MCQ'), taskFRQ('Data modeling FRQ')] },
+  /* Wed Apr  8 */ { unit:'unit-2a', topic:'2.6 Competing Function Model Validation', tasks:[taskStudy('2.6 Competing Models'), taskMCQ('2.6 MCQ'), taskFRQ('Model validation FRQ')] },
+  /* Thu Apr  9 */ { unit:'unit-2a', topic:'2.7A & 2.7B Composition of Functions', tasks:[taskStudy('2.7A & 2.7B Composition of Functions'), taskMCQ('Composition MCQ'), taskFRQ('Composition FRQ')] },
+  /* Fri Apr 10 */ { unit:'unit-2a', topic:'2.8 Inverse Functions',    tasks:[taskStudy('2.8 Inverse Functions'), taskMCQ('2.8 MCQ'), taskFRQ('Find inverses FRQ'), taskFlash('Inverse notation & properties')] },
+  /* Sat Apr 11 */ { unit:'unit-2a', topic:'Unit 2A REVIEW',           tasks:[taskReview('All of Unit 2A (2.1–2.8)'), taskMixed('Unit 2A mixed MCQ (20 questions)'), taskFRQ('Unit 2A FRQ full practice'), taskCumul('Units 1–2A combined'), taskWrap()] },
+
+  // ── WEEK 5 (Apr 13 Mon – Apr 18 Sat): Unit 2B ─────────────────
+  /* Mon Apr 13 */ { unit:'unit-2b', topic:'2.9 Logarithmic Expressions', tasks:[taskStudy('2.9 Logarithmic Expressions'), taskMCQ('2.9 MCQ'), taskFlash('Log laws & properties')] },
+  /* Tue Apr 14 */ { unit:'unit-2b', topic:'2.10 Inverses of Exponential Functions', tasks:[taskStudy('2.10 Inverses of Exponentials (ln & log)'), taskMCQ('2.10 MCQ'), taskFRQ('Inverse of exponential functions')] },
+  /* Wed Apr 15 */ { unit:'unit-2b', topic:'2.11 & 2.12 Logarithmic Functions & Manipulation', tasks:[taskStudy('2.11 Logarithmic Functions'), taskStudy('2.12 Log Manipulation'), taskMCQ('2.11–2.12 MCQ'), taskFRQ('Log manipulation FRQ')] },
+  /* Thu Apr 16 */ { unit:'unit-2b', topic:'2.13A & 2.13B Exp & Log Equations & Inequalities', tasks:[taskStudy('2.13A & 2.13B Exp & Log Equations & Inequalities'), taskMCQ('2.13 MCQ'), taskFRQ('Solve exp/log equations & inequalities')] },
+  /* Fri Apr 17 */ { unit:'unit-2b', topic:'2.14 & 2.15 Log Context, Modeling & Semi-log Plots', tasks:[taskStudy('2.14 Log Context & Data Modeling'), taskStudy('2.15 Semi-log Plots'), taskMCQ('2.14–2.15 MCQ'), taskFRQ('Semi-log modeling FRQ')] },
+  /* Sat Apr 18 */ { unit:'unit-2b', topic:'Unit 2B REVIEW',           tasks:[taskReview('All of Unit 2B (2.9–2.15)'), taskMixed('Unit 2B mixed MCQ (20 questions)'), taskFRQ('Unit 2B FRQ full practice'), taskCumul('Units 1–2 combined big review'), taskWrap()] },
+
+  // ── WEEK 6 (Apr 20 Mon – Apr 25 Sat): Unit 3A ─────────────────
+  /* Mon Apr 20 */ { unit:'unit-3a', topic:'3.1 Periodic Phenomena + 3.2A Radians', tasks:[taskStudy('3.1 Periodic Phenomena'), taskStudy('3.2A Radians'), taskMCQ('3.1–3.2A MCQ'), taskFlash('Radian conversion & period vocabulary')] },
+  /* Tue Apr 21 */ { unit:'unit-3a', topic:'3.2B Sine, Cosine & Tangent + 3.3A & 3.3B Values', tasks:[taskStudy('3.2B Sine, Cosine & Tangent'), taskStudy('3.3A & 3.3B Sine & Cosine Values'), taskMCQ('3.2B–3.3 MCQ'), taskFlash('Unit circle (memorize!)')] },
+  /* Wed Apr 22 */ { unit:'unit-3a', topic:'3.4 & 3.5 Sine & Cosine Graphs + Sinusoidal Functions', tasks:[taskStudy('3.4 Sine & Cosine Graphs'), taskStudy('3.5 Sinusoidal Functions'), taskMCQ('3.4–3.5 MCQ'), taskFRQ('Graph sinusoidal functions')] },
+  /* Thu Apr 23 */ { unit:'unit-3a', topic:'3.6A & 3.6B Sinusoidal Transformations', tasks:[taskStudy('3.6A & 3.6B Sinusoidal Transformations'), taskMCQ('3.6 MCQ'), taskFRQ('Sinusoidal transformation FRQ')] },
+  /* Fri Apr 24 */ { unit:'unit-3a', topic:'3.7 Sinusoidal Context & Data Modeling', tasks:[taskStudy('3.7 Sinusoidal Context & Data Modeling'), taskMCQ('3.7 MCQ'), taskFRQ('Real-world sinusoidal FRQ')] },
+  /* Sat Apr 25 */ { unit:'unit-3a', topic:'Unit 3A REVIEW',           tasks:[taskReview('All of Unit 3A (3.1–3.7)'), taskMixed('Unit 3A mixed MCQ (20 questions)'), taskFRQ('Unit 3A FRQ full practice'), taskCumul('Units 1–3A overview'), taskWrap()] },
+
+  // ── WEEK 7 (Apr 27 Mon – May 2 Sat): Unit 3B ──────────────────
+  /* Mon Apr 27 */ { unit:'unit-3b', topic:'3.8 & 3.9 Tangent Function + Inverse Trig', tasks:[taskStudy('3.8 The Tangent Function'), taskStudy('3.9 Inverse Trigonometric Functions'), taskMCQ('3.8–3.9 MCQ'), taskFlash('Tangent & inverse trig properties')] },
+  /* Tue Apr 28 */ { unit:'unit-3b', topic:'3.10 & 3.11 Trig Equations + Sec/Csc/Cot', tasks:[taskStudy('3.10 Trig Equations & Inequalities'), taskStudy('3.11 Sec, Csc & Cot Functions'), taskMCQ('3.10–3.11 MCQ'), taskFRQ('Solve trig equations')] },
+  /* Wed Apr 29 */ { unit:'unit-3b', topic:'3.12A & 3.12B Equivalent Trig Representations', tasks:[taskStudy('3.12A & 3.12B Equivalent Trig Representations'), taskMCQ('3.12 MCQ'), taskFRQ('Trig identities application')] },
+  /* Thu Apr 30 */ { unit:'unit-3b', topic:'3.13 Trig & Polar Coordinates + 3.14A & 3.14B Polar Graphs', tasks:[taskStudy('3.13 Trig & Polar Coordinates'), taskStudy('3.14A & 3.14B Polar Function Graphs'), taskMCQ('3.13–3.14 MCQ'), taskFRQ('Polar graph FRQ')] },
+  /* Fri May  1 */ { unit:'unit-3b', topic:'3.15 Rates of Change in Polar Functions', tasks:[taskStudy('3.15 Rates of Change in Polar Functions'), taskMCQ('3.15 MCQ'), taskFRQ('Polar rates FRQ'), taskFlash('Polar function key formulas')] },
+  /* Sat May  2 */ { unit:'unit-3b', topic:'Unit 3B REVIEW',           tasks:[taskReview('All of Unit 3B (3.8–3.15)'), taskMixed('Unit 3B mixed MCQ (20 questions)'), taskFRQ('Unit 3B FRQ full practice'), taskCumul('Units 1–3 complete overview'), taskWrap()] },
+
+  // ── WEEK 8 (May 4 Mon – May 10 Sun): FINAL REVIEW ─────────────
+  // (Last study day = Sat May 10; Sun May 11 = rest/exam eve; Mon May 12 = EXAM)
+  /* Mon May  4 */ { unit:'review', topic:'FINAL REVIEW – Units 1A & 1B',  tasks:[taskCumul('Unit 1A: Polynomial Functions (1.1–1.6)'), taskCumul('Unit 1B: Rational Functions & Transformations (1.7–1.14)'), taskMixed('Unit 1 big MCQ bank (25 questions)'), taskFRQ('Unit 1 FRQ drill (timed 25 min)')] },
+  /* Tue May  5 */ { unit:'review', topic:'FINAL REVIEW – Units 2A & 2B',  tasks:[taskCumul('Unit 2A: Exponential Functions & Compositions (2.1–2.8)'), taskCumul('Unit 2B: Logarithmic Functions (2.9–2.15)'), taskMixed('Unit 2 big MCQ bank (25 questions)'), taskFRQ('Unit 2 FRQ drill (timed 25 min)')] },
+  /* Wed May  6 */ { unit:'review', topic:'FINAL REVIEW – Units 3A & 3B',  tasks:[taskCumul('Unit 3A: Sinusoidal Functions (3.1–3.7)'), taskCumul('Unit 3B: Trig Advanced + Polar (3.8–3.15)'), taskMixed('Unit 3 big MCQ bank (25 questions)'), taskFRQ('Unit 3 FRQ drill (timed 25 min)')] },
+  /* Thu May  7 */ { unit:'review', topic:'FULL PRACTICE EXAM – Simulated AP Test', tasks:[{ type:'full', text:'📋 Part A: 28 MCQ – No Calculator (80 min, timed)' }, { type:'full', text:'📋 Part B: 12 MCQ – Calculator allowed (50 min, timed)' }, { type:'full', text:'📋 FRQ Section: 4 questions (60 min, timed)' }, taskWrap()] },
+  /* Fri May  8 */ { unit:'review', topic:'REVIEW – Grade Practice Exam & Fix Weak Spots', tasks:[{ type:'review', text:'📊 Score & analyze your practice exam' }, taskCumul('All units flagged as weak'), taskMixed('Mixed MCQ from weak topics (20 questions)'), taskFRQ('Redo missed FRQ questions')] },
+  /* Sat May  9 */ { unit:'review', topic:'FINAL POLISH – Formula Sheets & Light Mixed Practice', tasks:[taskFlash('All Unit 1 key formulas'), taskFlash('All Unit 2 key formulas'), taskFlash('All Unit 3 key formulas + unit circle'), taskMixed('Light mixed MCQ across all units (15 questions)')] },
+  /* Sun May 10 */ { unit:'review', topic:'EXAM EVE – Rest, Prep & Confidence', tasks:[{ type:'review', text:'🔁 Quick skim: formula sheets only (no new problems)' }, { type:'review', text:'🎯 Review top 3 personal weak areas (notes only)' }, { type:'review', text:'🧘 Pack calculator, pencils & ID — then sleep early!' }] },
+];
+// Total: 48 entries → fills exactly Mon Mar 17 – Sat May 10 (skipping all Sundays)
+// May 11 (Sun) = rest day by default, May 12 (Mon) = EXAM DAY 🎓
+
+// ─── BUILD WEEK GROUPS ────────────────────────────────────────────────────────
+// Hard-coded date assignment: assign each entry to the next non-Sunday calendar day
+// starting March 17, stopping before May 12 (exam day).
+
+function buildSchedule() {
+  const weeks = [];
+  const CUTOFF = new Date(2026, 4, 12); // May 12 – never assign tasks on/after this date
+
+  let calDay = new Date(START);
+  let rawIdx = 0;
+  let weekNum = 1;
+
+  while (rawIdx < rawSchedule.length) {
+    const weekDays = [];
+    // Walk 7 calendar days for this week
+    for (let d = 0; d < 7; d++) {
+      const dayOfWeek = calDay.getDay(); // 0=Sun
+      const isBeforeExam = calDay < CUTOFF;
+      if (dayOfWeek !== 0 && isBeforeExam && rawIdx < rawSchedule.length) {
+        weekDays.push({ date: new Date(calDay), ...rawSchedule[rawIdx] });
+        rawIdx++;
+      }
+      calDay.setDate(calDay.getDate() + 1);
+    }
+    if (weekDays.length > 0) {
+      weeks.push({ weekNum, weekDays });
+      weekNum++;
+    }
+  }
+  return weeks;
+}
+
+const WEEKS = buildSchedule();
+
+// ─── DOM RENDERING ────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'apPrecalcPlanner_v2';
+
+function getSaved() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch { return {}; }
+}
+function setSaved(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function taskId(weekIdx, dayIdx, taskIdx) {
+  return `w${weekIdx}_d${dayIdx}_t${taskIdx}`;
+}
+
+function renderPlanner() {
+  const saved = getSaved();
+  const plannerEl = document.getElementById('planner');
+  plannerEl.innerHTML = '';
+
+  WEEKS.forEach((week, wi) => {
+    const totalTasks = week.weekDays.reduce((a, d) => a + d.tasks.length, 0);
+    const doneTasks  = week.weekDays.reduce((a, d, di) =>
+      a + d.tasks.filter((_, ti) => saved[taskId(wi, di, ti)]).length, 0);
+    const weekPct = totalTasks ? Math.round(doneTasks / totalTasks * 100) : 0;
+    const weekDone = weekPct === 100;
+
+    // Determine dominant unit
+    const unitCounts = {};
+    week.weekDays.forEach(d => { unitCounts[d.unit] = (unitCounts[d.unit]||0)+1; });
+    const dominantUnit = Object.entries(unitCounts).sort((a,b)=>b[1]-a[1])[0][0];
+
+    // Week title
+    const topics = [...new Set(week.weekDays.map(d => d.topic).filter(t => !t.startsWith('Rest')))];
+    const firstTopic = topics[0] || '';
+    const isReview = dominantUnit === 'review';
+    const weekTitle = isReview ? `📚 Final Review Block` :
+      `${firstTopic.includes('REVIEW') ? '🔄' : '📗'} ${firstTopic.substring(0, 52)}${firstTopic.length > 52 ? '…' : ''}`;
+
+    const wStartStr = week.weekDays[0].date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+    const wEndStr   = week.weekDays[week.weekDays.length-1].date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+
+    const card = document.createElement('div');
+    card.className = `week-card ${dominantUnit}`;
+    card.dataset.week = wi;
+
+    card.innerHTML = `
+      <div class="week-header" onclick="toggleWeek(${wi})">
+        <div class="week-num-badge ${isReview ? 'review-badge' : ''}">W${week.weekNum}</div>
+        <div class="week-info">
+          <div class="week-title">${weekTitle}</div>
+          <div class="week-dates">${wStartStr} – ${wEndStr}</div>
+        </div>
+        <div class="week-progress-mini">
+          <div class="week-progress-track">
+            <div class="week-progress-fill" style="width:${weekPct}%" id="wpf_${wi}"></div>
+          </div>
+          <span class="week-pct-text" id="wpt_${wi}">${weekPct}%</span>
+          <span class="week-check-icon">${weekDone ? '✅' : ''}</span>
+        </div>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="week-body" id="wb_${wi}"></div>
+    `;
+
+    plannerEl.appendChild(card);
+
+    // Build day rows
+    const bodyEl = card.querySelector('.week-body');
+    week.weekDays.forEach((day, di) => {
+      const dayEl = document.createElement('div');
+      const dayName = day.date.toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric' });
+      const isToday = day.date.toDateString() === new Date().toDateString();
+      dayEl.className = `day-row ${day.unit}`;
+
+      const shortTopic = day.topic.length > 38 ? day.topic.substring(0,38)+'…' : day.topic;
+
+      dayEl.innerHTML = `
+        <div class="day-header">
+          <span class="day-badge">${isToday ? '📍 Today' : day.date.toLocaleDateString('en-US',{weekday:'short'})}</span>
+          <span class="day-name">${isToday ? '<strong>'+dayName+'</strong>' : dayName}</span>
+          <span class="day-topic-tag">${shortTopic}</span>
+        </div>
+        <div class="task-list" id="tl_${wi}_${di}"></div>
+      `;
+      bodyEl.appendChild(dayEl);
+
+      const taskListEl = dayEl.querySelector(`#tl_${wi}_${di}`);
+      day.tasks.forEach((task, ti) => {
+        const id = taskId(wi, di, ti);
+        const done = !!saved[id];
+        const item = document.createElement('div');
+        item.className = `task-item${done ? ' done' : ''}`;
+        item.dataset.id = id;
+        item.onclick = () => toggleTask(id, item);
+        item.innerHTML = `<div class="task-cb"></div><span class="task-text">${task.text}</span>`;
+        taskListEl.appendChild(item);
+      });
+    });
+
+    // Auto-open current week
+    if (isCurrentWeek(week)) {
+      card.classList.add('open');
+    }
+  });
+
+  updateGlobalProgress();
+}
+
+function isCurrentWeek(week) {
+  const today = new Date();
+  const first = week.weekDays[0].date;
+  const last  = week.weekDays[week.weekDays.length-1].date;
+  return today >= first && today <= last;
+}
+
+function toggleWeek(wi) {
+  const card = document.querySelector(`.week-card[data-week="${wi}"]`);
+  if (card) card.classList.toggle('open');
+}
+function expandAll()  { document.querySelectorAll('.week-card').forEach(c => c.classList.add('open')); }
+function collapseAll(){ document.querySelectorAll('.week-card').forEach(c => c.classList.remove('open')); }
+
+function toggleTask(id, itemEl) {
+  const saved = getSaved();
+  if (saved[id]) { delete saved[id]; itemEl.classList.remove('done'); }
+  else            { saved[id] = true; itemEl.classList.add('done'); }
+  setSaved(saved);
+  updateGlobalProgress();
+  updateWeekProgress(itemEl);
+}
+
+function updateWeekProgress(itemEl) {
+  const card = itemEl.closest('.week-card');
+  if (!card) return;
+  const wi = parseInt(card.dataset.week);
+  const week = WEEKS[wi];
+  const saved = getSaved();
+  let total = 0, done = 0;
+  week.weekDays.forEach((d, di) => {
+    d.tasks.forEach((_, ti) => {
+      total++;
+      if (saved[taskId(wi, di, ti)]) done++;
+    });
+  });
+  const pct = total ? Math.round(done/total*100) : 0;
+  const pfEl = document.getElementById(`wpf_${wi}`);
+  const ptEl = document.getElementById(`wpt_${wi}`);
+  if (pfEl) pfEl.style.width = pct+'%';
+  if (ptEl) ptEl.textContent = pct+'%';
+  // Update check icon
+  const checkEl = card.querySelector('.week-check-icon');
+  if (checkEl) checkEl.textContent = pct===100 ? '✅' : '';
+}
+
+function updateGlobalProgress() {
+  const saved = getSaved();
+  let total = 0, done = 0;
+  WEEKS.forEach((week, wi) => {
+    week.weekDays.forEach((d, di) => {
+      d.tasks.forEach((_, ti) => {
+        total++;
+        if (saved[taskId(wi, di, ti)]) done++;
+      });
+    });
+  });
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('globalPct').textContent = pct+'%';
+  document.getElementById('globalFill').style.width = pct+'%';
+}
+
+// ─── LEGEND ──────────────────────────────────────────────────────────────────
+function renderLegend() {
+  const el = document.getElementById('legend');
+  Object.entries(UNITS).forEach(([key, val]) => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<div class="legend-dot" style="background:${val.color}"></div>${val.label}`;
+    el.appendChild(item);
+  });
+}
+
+// ─── COUNTDOWN ───────────────────────────────────────────────────────────────
+function updateCountdown() {
+  const now  = new Date();
+  const diff = EXAM - now;
+  if (diff <= 0) {
+    document.getElementById('countdownRow').innerHTML = '<div class="countdown-chip"><span class="countdown-num">🎉</span><span class="countdown-label">Exam Day!</span></div>';
+    return;
+  }
+  const days  = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins  = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const secs  = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById('countdownRow').innerHTML = `
+    <div class="countdown-chip"><span class="countdown-num">${days}</span><span class="countdown-label">Days</span></div>
+    <div class="countdown-chip"><span class="countdown-num">${String(hours).padStart(2,'0')}</span><span class="countdown-label">Hours</span></div>
+    <div class="countdown-chip"><span class="countdown-num">${String(mins).padStart(2,'0')}</span><span class="countdown-label">Mins</span></div>
+    <div class="countdown-chip"><span class="countdown-num">${String(secs).padStart(2,'0')}</span><span class="countdown-label">Secs</span></div>
+  `;
+}
+
+// ─── RESET MODAL ─────────────────────────────────────────────────────────────
+function showResetModal() { document.getElementById('resetModal').classList.add('show'); }
+function hideResetModal() { document.getElementById('resetModal').classList.remove('show'); }
+function resetAll() {
+  localStorage.removeItem(STORAGE_KEY);
+  hideResetModal();
+  renderPlanner();
+  updateGlobalProgress();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderLegend();
+renderPlanner();
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Close modal on overlay click
+document.getElementById('resetModal').addEventListener('click', function(e) {
+  if (e.target === this) hideResetModal();
+});
+</script>
+</body>
+</html>
